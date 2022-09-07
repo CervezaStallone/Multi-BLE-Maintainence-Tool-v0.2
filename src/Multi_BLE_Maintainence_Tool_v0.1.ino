@@ -133,8 +133,4 @@ void loop() {
     events.send("ping",NULL,millis());
     events.send(getSensorReadings().c_str(),"new_readings" ,millis());
     lastTime = millis();
-  }
-  Serial.print(mc.getDewPoint());
-  Serial.println();
-  Serial.print(mc.getHumidityAbsolute());
 }
