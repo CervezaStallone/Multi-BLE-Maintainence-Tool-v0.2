@@ -53,7 +53,7 @@ String getSensorReadings(){
   sensors.requestTemperatures();
   delay(10);
   mc.calculate();
-  delay(10);
+  delay(50);
   readings["temperature"] = String(sensors.getTempCByIndex(0));
   readings["humidity"] = String(mc.getHumidity());
   readings["temperaturedewpoint"] = String(mc.getDewPoint());
