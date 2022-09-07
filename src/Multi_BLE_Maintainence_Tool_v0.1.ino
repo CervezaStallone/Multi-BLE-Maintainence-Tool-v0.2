@@ -51,9 +51,7 @@ float tempReadingC = sensors.getTempCByIndex(0);
 //Collect sensor data and parse to JSON
 String getSensorReadings(){
   sensors.requestTemperatures();
-  delay(10);
   mc.calculate();
-  delay(50);
   readings["temperature"] = String(sensors.getTempCByIndex(0));
   readings["humidity"] = String(mc.getHumidity());
   readings["temperaturedewpoint"] = String(mc.getDewPoint());
@@ -126,7 +124,8 @@ void setup() {
   mc.setTemperature(tempReadingC);
   mc.setHumidity(40.0);
   mc.setHumidity(40.0);
-  mc.setPressure(101300);
+  mc.setPressure(1013);
+  mc.calculate();
 }
 
 void loop() {
