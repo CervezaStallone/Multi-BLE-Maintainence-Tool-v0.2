@@ -39,6 +39,7 @@ AsyncEventSource events("/events");
 // Json Variable to Hold Sensor Readings
 JSONVar readings;
 
+
 // Timer variables
 unsigned long lastTime = 0;
 unsigned long timerDelay = 10000;
