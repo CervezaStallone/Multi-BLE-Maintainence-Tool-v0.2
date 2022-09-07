@@ -151,7 +151,7 @@ var gaugeHumAbs = new RadialGauge({
   renderTo: 'gauge-humidity-absolute',
   width: 300,
   height: 300,
-  units: "Absolute luchtvochtigheid (gr/kg)",
+  units: "Luchtvochtigheid (g/kg)",
   minValue: 0,
   maxValue: 100,
   colorValueBoxRect: "#049faa",
