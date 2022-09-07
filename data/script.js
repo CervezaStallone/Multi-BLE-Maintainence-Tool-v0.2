@@ -51,8 +51,8 @@ var gaugeTemp = new LinearGauge({
   barWidth: 10,
 }).draw();
 
-// Create Temperature Gauge
-var gaugeDewTemp = new LinearGauge({
+// Create Dewpoint Temperature Gauge
+var gaugeDewtemp = new LinearGauge({
   renderTo: 'gauge-temperature-dewpoint',
   width: 120,
   height: 400,
@@ -146,7 +146,7 @@ var gaugeHum = new RadialGauge({
   animationRule: "linear"
 }).draw();
 
-// Create Humidity Gauge
+// Create Absolute Humidity Gauge
 var gaugeHumAbs = new RadialGauge({
   renderTo: 'gauge-humidity-absolute',
   width: 300,
@@ -201,7 +201,7 @@ function getReadings(){
       var temp = myObj.temperature;
       var hum = myObj.humidity;
       var tempdew = myObj.temperaturedewpoint;
-      var humabs = myObj.humidity-bsolute;
+      var humabs = myObj.humidityabsolute;
       gaugeTemp.value = temp;
       gaugeDewtemp.value = tempdew;
       gaugeHum.value = hum;
