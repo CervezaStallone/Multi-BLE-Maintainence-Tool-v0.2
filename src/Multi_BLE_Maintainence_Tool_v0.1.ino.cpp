@@ -1,4 +1,4 @@
-# 1 "C:\\Users\\BrianR\\AppData\\Local\\Temp\\tmp0iyzi86_"
+# 1 "C:\\Users\\BrianR\\AppData\\Local\\Temp\\tmpaw03gvqp"
 #include <Arduino.h>
 # 1 "G:/Mijn Drive/01. Media/11. Development/01. Arduino/01. ESP32/Multi BLE Maintainence Tool v0.1/src/Multi_BLE_Maintainence_Tool_v0.1.ino"
 
@@ -127,7 +127,6 @@ void setup() {
 
 
   mc.setTemperature(tempReadingC);
-  mc.setHumidity(40.0);
   mc.setHumidity(40.0);
   mc.setPressure(1013);
   mc.calculate();
