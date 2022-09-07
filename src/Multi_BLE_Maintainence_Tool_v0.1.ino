@@ -42,7 +42,7 @@ JSONVar readings;
 
 // Timer variables
 unsigned long lastTime = 0;
-unsigned long timerDelay = 500;
+unsigned long timerDelay = 1000;
 
 //Set var for temp readings and calc
 float tempReadingC = sensors.getTempCByIndex(0);
@@ -51,6 +51,9 @@ float tempReadingC = sensors.getTempCByIndex(0);
 //Collect sensor data and parse to JSON
 String getSensorReadings(){
   sensors.requestTemperatures();
+  delay(10);
+  mc.calculate();
+  delay(10);
   readings["temperature"] = String(sensors.getTempCByIndex(0));
   readings["humidity"] = String(mc.getHumidity());
   readings["temperaturedewpoint"] = String(mc.getDewPoint());
@@ -123,8 +126,7 @@ void setup() {
   mc.setTemperature(tempReadingC);
   mc.setHumidity(40.0);
   mc.setHumidity(40.0);
-  mc.setPressure(1013);
-  mc.calculate();
+  mc.setPressure(101300);
 }
 
 void loop() {
