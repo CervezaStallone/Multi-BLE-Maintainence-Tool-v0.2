@@ -57,7 +57,7 @@ var gaugeDewtemp = new LinearGauge({
   width: 120,
   height: 400,
   units: "Dauwpunt Temperatuur C",
-  minValue: 0,
+   minValue: 0,
   startAngle: 90,
   ticksAngle: 180,
   maxValue: 40,
@@ -101,12 +101,12 @@ var gaugeDewtemp = new LinearGauge({
   barWidth: 10,
 }).draw();
 
-// Create Humidity Gauge
+// Create  Humidity Gauge
 var gaugeHum = new RadialGauge({
   renderTo: 'gauge-humidity',
   width: 300,
   height: 300,
-  units: "Luchtvochtigheid (%RH)",
+  units: "Luchtvochtigheid (g/kg)",
   minValue: 0,
   maxValue: 100,
   colorValueBoxRect: "#049faa",
