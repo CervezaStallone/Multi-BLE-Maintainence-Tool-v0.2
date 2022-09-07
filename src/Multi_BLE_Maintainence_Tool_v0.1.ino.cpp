@@ -1,4 +1,4 @@
-# 1 "C:\\Users\\BrianR\\AppData\\Local\\Temp\\tmp7gbmsliq"
+# 1 "C:\\Users\\BrianR\\AppData\\Local\\Temp\\tmpmflwq9nb"
 #include <Arduino.h>
 # 1 "G:/Mijn Drive/01. Media/11. Development/01. Arduino/01. ESP32/Multi BLE Maintainence Tool v0.1/src/Multi_BLE_Maintainence_Tool_v0.1.ino"
 
@@ -56,8 +56,9 @@ void loop();
 #line 52 "G:/Mijn Drive/01. Media/11. Development/01. Arduino/01. ESP32/Multi BLE Maintainence Tool v0.1/src/Multi_BLE_Maintainence_Tool_v0.1.ino"
 String getSensorReadings(){
   sensors.requestTemperatures();
-  delay(5);
+  delay(10);
   mc.calculate();
+  delay(50);
   readings["temperature"] = String(sensors.getTempCByIndex(0));
   readings["humidity"] = String(mc.getHumidity());
   readings["temperaturedewpoint"] = String(mc.getDewPoint());
