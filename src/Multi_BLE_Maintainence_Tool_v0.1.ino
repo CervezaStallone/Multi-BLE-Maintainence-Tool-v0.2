@@ -123,7 +123,6 @@ void setup() {
   //set meteo and calculate 
   mc.setTemperature(tempReadingC);
   mc.setHumidity(40.0);
-  mc.setHumidity(40.0);
   mc.setPressure(1013);
   mc.calculate();
 }
