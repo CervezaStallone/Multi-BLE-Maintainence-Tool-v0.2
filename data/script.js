@@ -57,7 +57,7 @@ var gaugeDewtemp = new LinearGauge({
   width: 120,
   height: 400,
   units: "Dauwpunt Temperatuur C",
-   minValue: 0,
+  minValue: 0,
   startAngle: 90,
   ticksAngle: 180,
   maxValue: 40,
