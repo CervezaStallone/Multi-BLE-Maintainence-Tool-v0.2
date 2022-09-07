@@ -30,6 +30,7 @@ DallasTemperature sensors(&oneWire);
 
 //Init Simple Meteo Calc
 SimpleMeteoCalc mc;
+
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
 
@@ -39,24 +40,21 @@ AsyncEventSource events("/events");
 // Json Variable to Hold Sensor Readings
 JSONVar readings;
 
-
 // Timer variables
 unsigned long lastTime = 0;
-unsigned long timerDelay = 10000;
+unsigned long timerDelay = 500;
+
+//Set var for temp readings and calc
+float tempReadingC = sensors.getTempCByIndex(0);
+
 
 //Collect sensor data and parse to JSON
 String getSensorReadings(){
-  sensors.requestTemperatures(); 
-  float tempReadingC = sensors.getTempCByIndex(0);
-  mc.setTemperature(tempReadingC);
-  mc.setHumidity(40.0);
-  mc.setPressure(1017.27);
-  mc.setUserAltitude(15.0);
-  delay(50);
-  mc.calculate();
+  sensors.requestTemperatures();
   readings["temperature"] = String(sensors.getTempCByIndex(0));
-  readings["temperature-dewpoint"] = String(mc.getDewPoint());
-  readings["humidity-absolute"] =  String(mc.getHumidityAbsolute());
+  readings["humidity"] = String(mc.getHumidity());
+  readings["temperaturedewpoint"] = String(mc.getDewPoint());
+  readings["humidityabsolute"] =  String(mc.getHumidityAbsolute());
   String jsonString = JSON.stringify(readings);
   return jsonString;
 }
@@ -117,43 +115,26 @@ void setup() {
 
   //Add and init serverhandler events
   server.addHandler(&events);
-
-  //Meteo calculations
   
   // Init and start server
   server.begin();
+
+  //set meteo and calculate 
+  mc.setTemperature(tempReadingC);
+  mc.setHumidity(40.0);
+  mc.setHumidity(40.0);
+  mc.setPressure(1013);
+  mc.calculate();
 }
 
 void loop() {
   if ((millis() - lastTime) > timerDelay) {
-    // Send Events to the client with the Sensor Readings Every 10 seconds
+    // Send Events to the client with the Sensor Readings Every 0,5 seconds
     events.send("ping",NULL,millis());
     events.send(getSensorReadings().c_str(),"new_readings" ,millis());
     lastTime = millis();
   }
-  float t = mc.getTemperature();
-  float h = mc.getHumidity();
-  float p = mc.getPressure();
-  float a = mc.getUserAltitude();
-  float td = mc.getDewPoint();
-  float ha = mc.getHumidityAbsolute();
+  Serial.print(mc.getDewPoint());
   Serial.println();
-  Serial.println();
-  Serial.print(F("INPUT:\t\tt="));
-  Serial.println();
-  Serial.print(t, 3);
-
-  Serial.print(F(" *C\th=")); 
-  Serial.println();       
-  Serial.print(h, 3);
-  
-  Serial.print(F(" mmHg\nTd="));     
-  Serial.println();
-  Serial.print(td, 3);
-
-  Serial.print(F(" m\nHa="));        
-  Serial.println();
-  Serial.print(ha, 3);
-  delay(2000);
-
+  Serial.print(mc.getHumidityAbsolute());
 }

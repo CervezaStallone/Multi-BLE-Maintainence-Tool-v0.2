@@ -200,10 +200,10 @@ function getReadings(){
       console.log(myObj);
       var temp = myObj.temperature;
       var hum = myObj.humidity;
-      var tempdew = myObj.temperature-dewpoint;
-      var humabs = myObj.humidity-absolute;
+      var tempdew = myObj.temperaturedewpoint;
+      var humabs = myObj.humidity-bsolute;
       gaugeTemp.value = temp;
-      gaugeDewTemp.value = tempdew;
+      gaugeDewtemp.value = tempdew;
       gaugeHum.value = hum;
       gaugeHumAbs.value = humabs;
     }
@@ -235,7 +235,7 @@ if (!!window.EventSource) {
     console.log(myObj);
     gaugeTemp.value = myObj.temperature;
     gaugeHum.value = myObj.humidity;
-    gaugeDewTemp.value = myObj.temperature-dewpoint;
-    gaugeHumAbs.value = myObj.humidity-absolute;
+    gaugeDewtemp.value = myObj.temperaturedewpoint;
+    gaugeHumAbs.value = myObj.humidityabsolute;
   }, false);
 }
