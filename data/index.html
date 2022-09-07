@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>ESP IOT DASHBOARD</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="all.css">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="gauge.min.js"></script>
+  </head>
+  <body>
+    <div class="topnav">
+      <h1>Multi Maintainence Tool v0.1</h1>
+    </div>
+    <div class="content">
+      <div class="card-grid">
+        <div class="card">
+          <p class="card-title">Temperatuur</p>
+          <canvas id="gauge-temperature"></canvas>
+        </div>
+        <div class="card">
+          <p class="card-title">Luchtvochtigheid</p>
+          <canvas id="gauge-humidity"></canvas>
+        </div>
+      </div>
+      <div class="card-grid">
+        <div class="card">
+          <p class="card-title">Dauwpunt</p>
+          <canvas id="gauge-temperature-dewpoint"></canvas>
+        </div>
+        <div class="card">
+          <p class="card-title">Absolute luchtvochtigheid</p>
+          <canvas id="gauge-humidity-absolute"></canvas>
+        </div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
