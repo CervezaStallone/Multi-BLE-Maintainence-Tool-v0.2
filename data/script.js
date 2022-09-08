@@ -6,7 +6,7 @@ var gaugeTemp = new LinearGauge({
   renderTo: 'gauge-temperature',
   width: 120,
   height: 400,
-  units: "Temperatuur C",
+  units: "Temperatuur *C",
   minValue: 0,
   startAngle: 90,
   ticksAngle: 180,
@@ -27,7 +27,7 @@ var gaugeTemp = new LinearGauge({
       "35",
       "40"
   ],
-  minorTicks: 4,
+  minorTicks: 2,
   strokeTicks: true,
   highlights: [
       {
@@ -46,17 +46,18 @@ var gaugeTemp = new LinearGauge({
   needleCircleSize: 7,
   needleCircleOuter: true,
   needleCircleInner: false,
-  animationDuration: 1500,
+  animationDuration: 500,
   animationRule: "linear",
   barWidth: 10,
 }).draw();
+
 
 // Create Dewpoint Temperature Gauge
 var gaugeDewtemp = new LinearGauge({
   renderTo: 'gauge-temperature-dewpoint',
   width: 120,
   height: 400,
-  units: "Dauwpunt Temperatuur C",
+  units: "Temperatuur *C",
   minValue: 0,
   startAngle: 90,
   ticksAngle: 180,
@@ -77,7 +78,7 @@ var gaugeDewtemp = new LinearGauge({
       "35",
       "40"
   ],
-  minorTicks: 4,
+  minorTicks: 2,
   strokeTicks: true,
   highlights: [
       {
@@ -96,7 +97,7 @@ var gaugeDewtemp = new LinearGauge({
   needleCircleSize: 7,
   needleCircleOuter: true,
   needleCircleInner: false,
-  animationDuration: 1500,
+  animationDuration: 500,
   animationRule: "linear",
   barWidth: 10,
 }).draw();
