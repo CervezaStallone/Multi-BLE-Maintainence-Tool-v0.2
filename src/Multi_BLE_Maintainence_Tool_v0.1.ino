@@ -13,23 +13,31 @@
 #include <SPIFFS.h>
 #include <Arduino_JSON.h>
 #include <SimpleMeteoCalc.h>
+#include <temperature.h>
+
+
+
 
 //Set Const
 const int oneWireBus = 4;
 const char* ssid     = "Multi Maintainence Tool v0.1";
 const char* password = "123456789";
 
-// Variable to store the HTTP request
-String header;
 
-//Set oneWire lib
+
+
+//Set oneWire and Dallas lib and set var for temp. reading
 OneWire oneWire(oneWireBus);
-
-//Set Dallas lib
 DallasTemperature sensors(&oneWire);
+float tempReadingC = sensors.getTempCByIndex(0);
 
-//Init Simple Meteo Calc
-SimpleMeteoCalc mc;
+//Set TC class and variables for Temperature Lib
+temperatureConverter TC;
+volatile float dp;
+
+//set const hum var for testing
+const int humReading = 54;
+
 
 // Create AsyncWebServer object on port 80
 AsyncWebServer server(80);
@@ -40,25 +48,30 @@ AsyncEventSource events("/events");
 // Json Variable to Hold Sensor Readings
 JSONVar readings;
 
+// Variable to store the HTTP request
+String header;
 // Timer variables
 unsigned long lastTime = 0;
-unsigned long timerDelay = 1000;
+unsigned long timerDelay = 100;
 
-//Set var for temp readings and calc
-float tempReadingC = sensors.getTempCByIndex(0);
+
 
 
 //Collect sensor data and parse to JSON
 String getSensorReadings(){
   sensors.requestTemperatures();
-  mc.calculate();
-  readings["temperature"] = String(sensors.getTempCByIndex(0));
-  readings["humidity"] = String(mc.getHumidity());
-  readings["temperaturedewpoint"] = String(mc.getDewPoint());
-  readings["humidityabsolute"] =  String(mc.getHumidityAbsolute());
+
+  delay(10);
+  readings["temperature"] = String(tempReadingC);
+  readings["humidity"] = String(humReading);
+  readings["temperaturedewpoint"] = String(dewPoint(tempReadingC, humReading), 2);
+  readings["humidityabsolute"] =  String();
   String jsonString = JSON.stringify(readings);
   return jsonString;
 }
+
+
+
 
 //mount the SPIFFS filesystem
 void initSPIFFS() {
@@ -67,6 +80,9 @@ void initSPIFFS() {
   }
   Serial.println("SPIFFS mounted successfully");
 }
+
+
+
 
 void setup() {
   //Set Serial Boudrate
@@ -120,11 +136,8 @@ void setup() {
   // Init and start server
   server.begin();
 
-  //set meteo and calculate 
-  mc.setTemperature(tempReadingC);
-  mc.setHumidity(40.0);
-  mc.setPressure(1013);
-  mc.calculate();
+  //Init Temperature Library dependecies
+  TC.setCelsius(tempReadingC);
 }
 
 void loop() {
