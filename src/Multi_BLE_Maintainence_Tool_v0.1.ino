@@ -42,7 +42,7 @@ JSONVar readings;
 
 // Timer variables
 unsigned long lastTime = 0;
-unsigned long timerDelay = 1000;
+unsigned long timerDelay = 250;
 
 //Set var for temp readings and calc
 float tempReadingC = sensors.getTempCByIndex(0);
