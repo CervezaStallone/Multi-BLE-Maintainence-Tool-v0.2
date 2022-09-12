@@ -72,6 +72,7 @@ void climateCalculator() {
   mc.setTemperature(tempReadingC);
   mc.setHumidity(40.0);
   mc.setPressure(1013);
+  mc.calculate();
 }
 
 void setup() {
