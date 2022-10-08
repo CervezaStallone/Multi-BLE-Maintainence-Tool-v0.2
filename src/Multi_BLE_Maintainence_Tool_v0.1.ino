@@ -13,11 +13,18 @@
 #include <SPIFFS.h>
 #include <Arduino_JSON.h>
 #include <SimpleMeteoCalc.h>
+#include <DHT.h>
+#include <Adafruit_Sensor.h>
 
 //Set Const
 const int oneWireBus = 4;
+const int DHTpin = 2;
+const int baroPreassure = 1013;
 const char* ssid     = "Multi Maintainence Tool v0.1";
 const char* password = "123456789";
+const char* DHTtype = "DHT11";
+
+
 
 // Variable to store the HTTP request
 String header;
@@ -27,6 +34,9 @@ OneWire oneWire(oneWireBus);
 
 //Set Dallas lib
 DallasTemperature sensors(&oneWire);
+
+//Set DHT lib
+DHT dht(DHTpin, DHT11);
 
 //Init Simple Meteo Calc
 SimpleMeteoCalc mc;
@@ -46,6 +56,8 @@ unsigned long timerDelay = 250;
 
 //Set var for temp readings and calc
 float tempReadingC = sensors.getTempCByIndex(0);
+float humReadingRh = dht.readHumidity();
+float dhtTemp = dht.readTemperature();
 
 
 //Collect sensor data and parse to JSON
@@ -69,9 +81,11 @@ void initSPIFFS() {
 
 void climateCalculator() {
   sensors.requestTemperatures();
+  dht.readHumidity();
+  dht.readTemperature();
   mc.setTemperature(tempReadingC);
-  mc.setHumidity(40.0);
-  mc.setPressure(1013);
+  mc.setHumidity(humReadingRh);
+  mc.setPressure(baroPreassure);
   mc.calculate();
 }
 
@@ -140,5 +154,6 @@ void loop() {
     events.send("ping",NULL,millis());
     events.send(getSensorReadings().c_str(),"new_readings" ,millis());
     lastTime = millis();
+    Serial.println(dhtTemp);
   }
 }
