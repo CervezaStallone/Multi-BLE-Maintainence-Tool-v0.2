@@ -91,7 +91,7 @@ void climateCalculator() {
 
 void setup() {
   //Set Serial Boudrate
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   //Init filesystem
   initSPIFFS();
